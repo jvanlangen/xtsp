@@ -29,7 +29,7 @@ namespace xtsp
             // Run
             await core.Run();
 
-            logger.LogInformation("Stopped");
+            logger.LogInformation("Stopped"); 
         }
     }
 }
