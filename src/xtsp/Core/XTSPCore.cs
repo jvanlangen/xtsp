@@ -8,7 +8,7 @@ namespace xtsp.Core
 {
     public class XTSPCore : IXTSPCore
     {
-        private ILogger<IXTSPCore> _logger;
+        private readonly ILogger<IXTSPCore> _logger;
 
         public XTSPCore(ILoggerFactory loggerFactory)
         {
