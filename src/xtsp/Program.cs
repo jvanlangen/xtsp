@@ -11,24 +11,25 @@ namespace xtsp
     {
         static async Task Main(string[] args)
         {
-            using (var loggerFactory = LoggerFactory.Create(builder => builder.AddConsole()))
-            {
-                var serviceProvider = new ServiceCollection()
-                    .AddLogging()
-                    .AddSingleton<IXTSPCore, XTSPCore>()
-                    .AddSingleton<ILoggerFactory>(sp => loggerFactory)
-                    .BuildServiceProvider();
+            using var loggerFactory = LoggerFactory.Create(builder => builder.AddConsole());
 
-                var logger = loggerFactory.CreateLogger<Program>();
+            var logger = loggerFactory.CreateLogger<Program>();
 
-                logger.LogInformation("Starting application");
+            logger.LogInformation("Startup");
 
-                //do the actual work here
-                var core = serviceProvider.GetService<IXTSPCore>();
-                await core.Run();
+            var serviceProvider = new ServiceCollection()
+                .AddLogging()
+                .AddSingleton<IXTSPCore, XTSPCore>()
+                .AddSingleton<ILoggerFactory>(sp => loggerFactory)
+                .BuildServiceProvider();
 
-                logger.LogInformation("All done!");
-            }
+            // Get an instance of the core
+            var core = serviceProvider.GetService<IXTSPCore>();
+
+            // Run
+            await core.Run();
+
+            logger.LogInformation("Stopped");
         }
     }
 }

@@ -6,11 +6,6 @@ using System.Threading.Tasks;
 
 namespace xtsp.Core
 {
-    public interface IXTSPCore
-    {
-        Task Run();
-    }
-
     public class XTSPCore : IXTSPCore
     {
         private ILogger<IXTSPCore> _logger;
